@@ -1,15 +1,7 @@
 <div ng-cloak>
     <div class="row">
         <div class="grid">
-            <grid-drop-square size="3" content="contents[0]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[1]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[2]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[3]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[4]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[5]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[6]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[7]" drop-target drag-target></grid-drop-square>
-            <grid-drop-square size="3" content="contents[8]" drop-target drag-target></grid-drop-square>
+            <grid-drop-square ng-repeat="content in contents" size="3" content="content" drop-target drag-target></grid-drop-square>
         </div>
     </div>
 </div>
