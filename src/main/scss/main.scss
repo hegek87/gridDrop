@@ -1,0 +1,195 @@
+$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
+// bower:scss
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.development {
+    position: absolute;
+    width: 149px;
+    height: 149px;
+    top: 0;
+    left: 0;
+    border: 0;
+    z-index: 1000;
+    background-image: url("../images/development_ribbon.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.navbar-version {
+    font-size: 10px;
+    color: #ccc
+}
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.hero-unit {
+    margin: 50px auto 0 auto;
+    width: 300px;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 60px;
+}
+
+.hero-unit h1 {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.error {
+    color: white;
+    background-color: red;
+}
+
+.hipster {
+    display: inline-block;
+    width: 347px;
+    height: 497px;
+    background: url("../images/hipster.png") no-repeat center top;
+    background-size: contain;
+}
+
+/* wait autoprefixer update to allow simple generation of high pixel density media query */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+    .hipster {
+        background: url("../images/hipster2x.png") no-repeat center top;
+        background-size: contain;
+    }
+}
+
+/* make sure browsers use the pointer cursor for anchors, even with no href */
+a:hover {
+  cursor: pointer;
+}
+
+
+/* start Password strength bar style */
+ul#strength {
+    display:inline;
+    list-style:none;
+    margin:0;
+    margin-left:15px;
+    padding:0;
+    vertical-align:2px;
+}
+
+.point:last {
+    margin:0 !important;
+}
+.point {
+    background:#DDD;
+    border-radius:2px;
+    display:inline-block;
+    height:5px;
+    margin-right:1px;
+    width:20px;
+}
+/* end Password strength bar style */
+
+$gridSize: 14;
+
+.grid {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.full-size-grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.grid-cell-large {
+    background-color: lightgray;
+    float: left;
+    @for $x from 1 through $gridSize {
+        &.grid-size-#{$x} {
+            position: relative;
+            width: (1 / $x) * 100%;
+            padding-bottom: (1 / ($x + 2)) * 100%;
+            border: 1px solid black;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+.grid-cell {
+    background-color: lightgrey;
+    float: left;
+    @for $x from 1 through $gridSize {
+        &.grid-size-#{$x} {
+            position: relative;
+            width: (1 / $x) * 100%;
+            padding-bottom: (1 / ($x + 5)) * 100%;
+            border: 1px solid black;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+.grid-square-content {
+    position:absolute;
+    height:100%;
+    width:100%;
+    text-align: center;
+}
+
+.grid-text-small {
+    font-size: 11px;
+}
+
+.grid-table {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.grid-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+}
+
+.hover {
+    border: 1px dotted black;
+}
+
+.dragged {
+    opacity: 0.25;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}

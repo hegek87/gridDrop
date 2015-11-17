@@ -1,0 +1,10 @@
+<div>
+    <div class="well grid">
+        <div ng-repeat="row in getRows() track by $index" ng-init="x=$index">
+            <div ng-repeat="col in getCols() track by $index" ng-init="y=$index">
+                <compartment size="height" content="dummy" drop-target drag-target></compartment>
+            </div>
+        </div>
+    </div>
+</div>
+

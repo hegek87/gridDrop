@@ -1,0 +1,21 @@
+{
+  "generator-jhipster": {
+    "baseName": "gridDrop",
+    "packageName": "com.mycompany.myapp",
+    "packageFolder": "com/mycompany/myapp",
+    "authenticationType": "session",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "no",
+    "useCompass": true,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8",
+    "enableTranslation": true,
+    "rememberMeKey": "5ae4d76569930c094325f93a2a8870c842453f91"
+  }
+}
