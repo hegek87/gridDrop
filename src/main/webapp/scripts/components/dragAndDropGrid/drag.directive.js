@@ -4,10 +4,9 @@ angular.module('griddropApp')
     .directive('dragTarget', function() {
         return {
             restrict: 'A',
-            require: ['compartment', '^grid'],
             replace: true,
             link: function(scope, el, attrs, ctrl) {
-                angular.element(el).attr("draggable", true);
+                angular.element(el).attr("draggable", "true");
 
                 el.bind('dragstart', function(e) {
                     e.originalEvent.dataTransfer.effectAllowed = 'move';
