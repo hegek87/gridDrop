@@ -1,7 +1,8 @@
 angular.module('griddropApp')
-    .directive('dropTarget', function() {
+    .directive('dropTarget', ['DragAndDropHelper', function(DragAndDropHelper) {
         return {
             restrict: 'A',
+            require: 'gridDropSquare',
             link: function(scope, el, attrs, ctrl) {
                 el.bind('drop', function(e) {
                     if(e.preventDefault) {
@@ -10,7 +11,9 @@ angular.module('griddropApp')
                     if(e.stopPropagation) {
                         e.stopPropagation();
                     }
+                    ctrl.setContent(DragAndDropHelper.getContent());
                     angular.element(e.currentTarget).removeClass('hover');
+                    scope.$apply();
                 });
 
                 el.bind('dragover', function(e) {
@@ -30,4 +33,4 @@ angular.module('griddropApp')
                 });
             }
         }
-    });
+    }]);
