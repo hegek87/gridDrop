@@ -9,18 +9,19 @@ angular.module('griddropApp')
 
             $scope.totalScore = 0;
 
-            $scope.contents = [];
+            $scope.current = {
+                contents: []
+            };
             for(var i = 0; i < 3; ++i) {
                 var contentRow = [];
                 for(var j = 0; j < 3; ++j) {
                     contentRow.push({ score: 0, color: 'lightgrey' });
                 }
-                $scope.contents.push(contentRow);
+                $scope.current.contents.push(contentRow);
             }
 
             $scope.$on('grid-drop-change', function(result) {
-                console.log('here');
-                $scope.checkGridForAdjacentMatches($scope.contents);
+                $scope.checkGridForAdjacentMatches($scope.current.contents);
             });
 
             $scope.checkGridForAdjacentMatches = function(grid) {
@@ -42,7 +43,7 @@ angular.module('griddropApp')
                 var bottom = (x === grid.length - 1) ? {} : grid[x+1][y];
                 var bottomRight = ((x === grid.length - 1) || (y === grid.length - 1)) ? {} : grid[x+1][y+1];
 
-                isMatchFound = $scope.isMatch(grid[x][y], topLeft);
+                isMatchFound = isMatchFound || $scope.isMatch(grid[x][y], topLeft);
                 isMatchFound = $scope.isMatch(grid[x][y], top);
                 isMatchFound = $scope.isMatch(grid[x][y], topRight);
                 isMatchFound = $scope.isMatch(grid[x][y], midLeft);
