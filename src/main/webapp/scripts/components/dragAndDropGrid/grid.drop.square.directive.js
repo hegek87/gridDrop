@@ -5,7 +5,8 @@ angular.module('griddropApp')
             replace: true,
             scope: {
                 size: '=',
-                content: '='
+                content: '=',
+                isPalette: '='
             },
             controller: ['$scope', function($scope) {
                 this.getContent = function() {
@@ -14,6 +15,10 @@ angular.module('griddropApp')
 
                 this.setContent = function(content) {
                     $scope.content = content;
+                };
+
+                this.isPalette = function() {
+                    return $scope.isPalette;
                 }
             }],
             link: function(scope, el, attrs, ctrl) {},

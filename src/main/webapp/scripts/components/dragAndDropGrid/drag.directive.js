@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('griddropApp')
-    .directive('dragTarget', ['DragAndDropHelper', function(DragAndDropHelper) {
+    .directive('dragTarget', ['DragAndDropHelper', 'RandomContent', function(DragAndDropHelper, RandomContent) {
         return {
             restrict: 'A',
             replace: true,
@@ -21,7 +21,11 @@ angular.module('griddropApp')
                 });
 
                 el.bind('dragend', function(e) {
+                    if(ctrl.isPalette()) {
+                        ctrl.setContent(RandomContent.getRandomContent())
+                    }
                     angular.element(e.target).removeClass('dragged');
+                    scope.$apply();
                 })
             }
         }
