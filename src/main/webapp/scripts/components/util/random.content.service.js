@@ -2,11 +2,23 @@
 
 angular.module('griddropApp')
     .factory('RandomContent', function() {
+
+        var colors = [
+            'red',
+            'blue',
+            'green',
+            'orange',
+            'black',
+            'yellow',
+            'white',
+            'pink'
+        ];
+
         return {
             getRandomContent: function () {
                 return {
                     score: Math.floor((Math.random() * 100) + 1),
-                    color: this.randomColor()
+                    color: colors[Math.floor(Math.random() * colors.length)]
                 }
             },
 

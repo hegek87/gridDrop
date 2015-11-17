@@ -13,6 +13,7 @@ angular.module('griddropApp')
                     }
                     ctrl.setContent(DragAndDropHelper.getContent());
                     angular.element(e.currentTarget).removeClass('hover');
+                    scope.$emit('grid-drop-change');
                     scope.$apply();
                 });
 

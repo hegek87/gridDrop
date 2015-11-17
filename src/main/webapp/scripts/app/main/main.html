@@ -1,11 +1,11 @@
 <div ng-cloak>
     <div class="row">
         <div class="col-md-6">
-            <grid-drop-square size="3" is-palette="true" content="initial" drag-target></grid-drop-square>
+            <grid-drop-square size="3" is-palette="true" content="initial" drag-target="true"></grid-drop-square>
         </div>
         <div class="grid col-md-6">
             <div ng-repeat="row in contents">
-                <grid-drop-square ng-repeat="content in row" size="3" content="content" drop-target drag-target>
+                <grid-drop-square ng-repeat="content in row" size="3" content="content" drop-target drag-target="false">
 
                 </grid-drop-square>
             </div>
