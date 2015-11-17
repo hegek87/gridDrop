@@ -171,3 +171,8 @@ $gridSize: 14;
     -ms-transform: scale(0.8);
     -o-transform: scale(0.8);
 }
+
+.grid-drop-text-border {
+    color: black;
+    text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -0.5px white;
+}
