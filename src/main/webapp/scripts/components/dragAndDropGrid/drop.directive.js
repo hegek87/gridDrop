@@ -11,7 +11,9 @@ angular.module('griddropApp')
                     if(e.stopPropagation) {
                         e.stopPropagation();
                     }
-                    ctrl.setContent(DragAndDropHelper.getContent());
+                    if(ctrl.getContent().color === 'lightgrey') {
+                        ctrl.setContent(DragAndDropHelper.getContent());
+                    }
                     angular.element(e.currentTarget).removeClass('hover');
                     scope.$emit('grid-drop-change', {
                         dropPositionX: ctrl.getGridDropX(),

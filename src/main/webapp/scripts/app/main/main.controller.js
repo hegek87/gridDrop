@@ -8,19 +8,41 @@ angular.module('griddropApp')
             $scope.initial = RandomContent.getRandomContent();
 
             $scope.totalScore = 0;
+            $scope.gameOver = false;
 
             $scope.contents = [];
-            for(var i = 0; i < 3; ++i) {
-                var contentRow = [];
-                for(var j = 0; j < 3; ++j) {
-                    contentRow.push({ score: 0, color: 'lightgrey' });
+
+            $scope.resetGame = function() {
+                $scope.contents = [];
+                for(var i = 0; i < 3; ++i) {
+                    var contentRow = [];
+                    for(var j = 0; j < 3; ++j) {
+                        contentRow.push({ score: 0, color: 'lightgrey' });
+                    }
+                    $scope.contents.push(contentRow);
                 }
-                $scope.contents.push(contentRow);
-            }
+                $scope.totalScore = 0;
+            };
+            $scope.resetGame();
+
 
             $scope.$on('grid-drop-change', function(event, position) {
                 $scope.clearMatches($scope.contents, position.dropPositionX, position.dropPositionY);
+                if($scope.isGameOver()) {
+                    $scope.gameOver = true;
+                }
             });
+
+            $scope.isGameOver = function() {
+                var gameOver = true;
+                angular.forEach($scope.contents, function(rows) {
+                    angular.forEach(rows, function(el) {
+                        if(el.color === 'lightgrey') {
+                            gameOver = false;
+                        }
+                    })
+                })
+            };
 
             $scope.clearMatches = function(grid, x, y) {
                 var initialScore = $scope.totalScore;

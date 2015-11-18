@@ -4,6 +4,9 @@
             <label translate="main.score"></label>
             {{ totalScore }}
         </span>
+        <button ng-disabled="gameOver" ng-click="resetGame()" class="btn btn-primary">
+            Reset Game
+        </button>
     </div>
     <div class="row">
         <div class="col-md-6">
