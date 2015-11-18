@@ -6,9 +6,19 @@ angular.module('griddropApp')
             scope: {
                 size: '=',
                 content: '=',
-                isPalette: '='
+                isPalette: '=',
+                gridDropX: '=',
+                gridDropY: '='
             },
             controller: ['$scope', function($scope) {
+                this.getGridDropX = function() {
+                    return $scope.gridDropX;
+                };
+
+                this.getGridDropY = function() {
+                    return $scope.gridDropY;
+                };
+
                 this.getContent = function() {
                     return $scope.content;
                 };

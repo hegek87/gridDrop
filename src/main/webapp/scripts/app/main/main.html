@@ -1,12 +1,25 @@
 <div ng-cloak>
     <div class="row">
+        <span class="text-center">
+            <label translate="main.score"></label>
+            {{ totalScore }}
+        </span>
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <grid-drop-square size="3" is-palette="true" content="initial" drag-target="true"></grid-drop-square>
         </div>
         <div class="col-md-6">
-            <div ng-repeat="row in current.contents track by $index" ng-init="x=$index">
+            <div ng-repeat="row in contents track by $index" ng-init="x=$index">
                 <div ng-repeat="col in row track by $index" ng-init="y=$index">
-                    <grid-drop-square size="3" content="current.contents[x][y]" drop-target drag-target="false"></grid-drop-square>
+                    <grid-drop-square size="3"
+                                      grid-drop-x="x"
+                                      grid-drop-y="y"
+                                      content="contents[x][y]"
+                                      drop-target
+                                      drag-target="false">
+
+                    </grid-drop-square>
                 </div>
             </div>
         </div>

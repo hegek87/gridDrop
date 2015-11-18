@@ -9,70 +9,69 @@ angular.module('griddropApp')
 
             $scope.totalScore = 0;
 
-            $scope.current = {
-                contents: []
-            };
+            $scope.contents = [];
             for(var i = 0; i < 3; ++i) {
                 var contentRow = [];
                 for(var j = 0; j < 3; ++j) {
                     contentRow.push({ score: 0, color: 'lightgrey' });
                 }
-                $scope.current.contents.push(contentRow);
+                $scope.contents.push(contentRow);
             }
 
-            $scope.$on('grid-drop-change', function(result) {
-                $scope.checkGridForAdjacentMatches($scope.current.contents);
+            $scope.$on('grid-drop-change', function(event, position) {
+                $scope.clearMatches($scope.contents, position.dropPositionX, position.dropPositionY);
             });
 
-            $scope.checkGridForAdjacentMatches = function(grid) {
-                for(var i = 0; i < grid.length; ++i) {
-                    for(var j = 0; j < grid[i].length; ++j) {
-                        $scope.checkElementForAdjacentMatches(i, j, grid);
-                    }
+            $scope.clearMatches = function(grid, x, y) {
+                var initialScore = $scope.totalScore;
+
+                $scope.clearAdjacentMatches(grid, x, y);
+
+                if($scope.scoreChanged(initialScore)) {
+                    $scope.reset(grid[x][y]);
                 }
             };
 
-            $scope.checkElementForAdjacentMatches = function(x, y, grid) {
-                var isMatchFound = false;
-                var topLeft = ((x === 0) || (y === 0)) ? {} : grid[x-1][y-1];
-                var top = (x === 0) ? {} : grid[x-1][y];
-                var topRight = ((x === 0) || (y === grid.length - 1)) ? {} : grid[x-1][y+1];
-                var midLeft = (y === 0) ? {} : grid[x][y-1];
-                var midRight = (y === grid.length - 1) ? {} : grid[x][y+1];
-                var bottomLeft = ((x === grid.length - 1) || y === 0) ? {} : grid[x+1][y-1];
-                var bottom = (x === grid.length - 1) ? {} : grid[x+1][y];
-                var bottomRight = ((x === grid.length - 1) || (y === grid.length - 1)) ? {} : grid[x+1][y+1];
+            $scope.clearAdjacentMatches = function(grid, x, y) {
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x-1, y-1)); // top left
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x-1, y)); // top
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x-1, y+1)); // top right
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x, y-1)); // mid left
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x, y+1)); // mid right
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x+1, y-1)); // bottom left
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x+1, y)); // bottom
+                $scope.clearCellIfPossible(grid[x][y], $scope.getCellFromCoordinates(grid, x+1, y+1)); // bottom right
+            };
 
-                isMatchFound = isMatchFound || $scope.isMatch(grid[x][y], topLeft);
-                isMatchFound = $scope.isMatch(grid[x][y], top);
-                isMatchFound = $scope.isMatch(grid[x][y], topRight);
-                isMatchFound = $scope.isMatch(grid[x][y], midLeft);
-                isMatchFound = $scope.isMatch(grid[x][y], midRight);
-                isMatchFound = $scope.isMatch(grid[x][y], bottomLeft);
-                isMatchFound = $scope.isMatch(grid[x][y], bottom);
-                isMatchFound = $scope.isMatch(grid[x][y], bottomRight);
-
-                if(isMatchFound) {
-                    $scope.reset(grid[x][y]);
+            $scope.clearCellIfPossible = function(original, adjacent) {
+                if($scope.isMatch(original, adjacent)) {
+                    $scope.reset(adjacent);
                 }
-
-                return isMatchFound;
             };
 
             $scope.isMatch = function(original, gridElement) {
-                if(original.color === gridElement) {
-                    $scope.reset(gridElement);
-                    return true;
-                }
-                else {
-                    return false;
-                }
+                return original.color === gridElement.color;
             };
 
             $scope.reset = function(gridElement) {
                 gridElement.color = 'lightgrey';
-                $scope.totalScore += girdElement.score;
+                $scope.totalScore += gridElement.score;
                 gridElement.score = 0;
+            };
+
+            $scope.getCellFromCoordinates = function(grid, x, y) {
+                if($scope.outOfBounds(x, y, grid.length)) {
+                    return {}
+                }
+                return grid[x][y];
+            };
+
+            $scope.outOfBounds = function(x, y, gridSize) {
+                return x < 0 || y < 0 || x >= gridSize || y >= gridSize;
+            };
+
+            $scope.scoreChanged = function(initialScore) {
+                return initialScore !== $scope.totalScore;
             }
         });
     }]);
