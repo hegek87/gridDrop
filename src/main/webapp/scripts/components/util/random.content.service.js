@@ -14,11 +14,14 @@ angular.module('griddropApp')
             'pink'
         ];
 
+        var currentShape = 'grid-cell';
+
         return {
             getRandomContent: function () {
                 return {
                     score: Math.floor((Math.random() * 100) + 1),
-                    color: colors[Math.floor(Math.random() * colors.length)]
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    displayClass: currentShape
                 }
             },
 

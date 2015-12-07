@@ -1,12 +1,25 @@
 <div ng-cloak>
-    <div class="row">
-        <span class="text-center">
-            <label translate="main.score"></label>
-            {{ totalScore }}
-        </span>
-        <button ng-disabled="gameOver" ng-click="resetGame()" class="btn btn-primary">
-            Reset Game
-        </button>
+    <div class="well">
+        <div style="margin-bottom: 5px;" class="row">
+            <span class="col-md-4 text-center">
+                <label translate="main.score"></label>
+                {{ totalScore }}
+            </span>
+            <div class="col-md-4">
+                <select class="form-control"
+                        ng-model="currentShape"
+                        ng-change="updateCells()"
+                        ng-options="shape as shape.displayName for shape in shapes">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button ng-click="resetGame()" class="btn btn-primary">
+                    Reset Game
+                </button>
+            </div>
+        </div>
+        <div ng-if="gameOver" class="text-center row alert alert-danger">Game Over!</div>
     </div>
     <div class="row">
         <div class="col-md-6">

@@ -12,18 +12,39 @@ angular.module('griddropApp')
 
             $scope.contents = [];
 
+            $scope.shapes = [
+                {
+                    displayName: 'Square',
+                    displayClass: 'grid-cell'
+                },
+                {
+                    displayName: 'Star',
+                    displayClass: 'grid-cell-star'
+                }
+            ];
+            $scope.currentShape = $scope.shapes[0];
+
             $scope.resetGame = function() {
                 $scope.contents = [];
                 for(var i = 0; i < 3; ++i) {
                     var contentRow = [];
                     for(var j = 0; j < 3; ++j) {
-                        contentRow.push({ score: 0, color: 'lightgrey' });
+                        contentRow.push({ score: 0, color: 'lightgrey', displayClass: $scope.shapes[0].displayClass });
                     }
                     $scope.contents.push(contentRow);
                 }
                 $scope.totalScore = 0;
+                $scope.gameOver = false;
             };
+
             $scope.resetGame();
+
+            $scope.updateCells = function() {
+                console.log('here');
+                angular.forEach($scope.contents, function(content) {
+                    content.displayClass = $scope.currentShape.displayClass;
+                })
+            };
 
 
             $scope.$on('grid-drop-change', function(event, position) {
@@ -41,8 +62,11 @@ angular.module('griddropApp')
                             gameOver = false;
                         }
                     })
-                })
+                });
+                return gameOver;
             };
+
+            $scope.gameOver = $scope.isGameOver();
 
             $scope.clearMatches = function(grid, x, y) {
                 var initialScore = $scope.totalScore;

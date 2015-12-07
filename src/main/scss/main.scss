@@ -136,6 +136,21 @@ $gridSize: 14;
     }
 }
 
+.grid-cell-star {
+    background-color: lightgray;
+    float: left;
+    @for $x from 1 through $gridSize {
+        &.grid-size-#{x} {
+            position: relative;
+            width: (1 / ($x+3)) * 100%;
+            padding-bottom: (1 / $x) * 100%;
+            border: 1px solid black;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
 .grid-square-content {
     position:absolute;
     height:100%;
@@ -177,3 +192,6 @@ $gridSize: 14;
     text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -0.5px white;
 }
 
+.top-padding {
+    margin-top: 10px;
+}

@@ -9,6 +9,7 @@ angular.module('griddropApp')
             link: function(scope, el, attrs, ctrl) {
                 angular.element(el).attr("draggable", attrs['dragTarget']);
 
+
                 el.bind('dragstart', function(e) {
                     e.originalEvent.dataTransfer.effectAllowed = attrs['dragTarget'] === 'true' ? 'move' : 'none';
 
