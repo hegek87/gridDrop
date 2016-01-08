@@ -136,13 +136,14 @@ $gridSize: 14;
     }
 }
 
-.grid-cell-star {
+.grid-cell-circle {
     background-color: lightgray;
     float: left;
     @for $x from 1 through $gridSize {
-        &.grid-size-#{x} {
+        &.grid-size-#{$x} {
             position: relative;
-            width: (1 / ($x+3)) * 100%;
+            border-radius: 50%;
+            width: (1 / $x) * 100%;
             padding-bottom: (1 / $x) * 100%;
             border: 1px solid black;
             display: inline-block;

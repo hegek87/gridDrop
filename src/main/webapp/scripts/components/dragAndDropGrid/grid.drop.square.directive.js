@@ -29,7 +29,11 @@ angular.module('griddropApp')
 
                 this.isPalette = function() {
                     return $scope.isPalette;
-                }
+                };
+
+                $scope.$watch('content.displayClass', function(displayClass) {
+                    $scope.chosenClass = 'grid-size-' + $scope.size + ' ' + displayClass;
+                })
             }],
             link: function(scope, el, attrs, ctrl) {},
             templateUrl: 'scripts/components/dragAndDropGrid/grid-drop-square.html'

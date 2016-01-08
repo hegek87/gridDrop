@@ -18,8 +18,8 @@ angular.module('griddropApp')
                     displayClass: 'grid-cell'
                 },
                 {
-                    displayName: 'Star',
-                    displayClass: 'grid-cell-star'
+                    displayName: 'Circle',
+                    displayClass: 'grid-cell-circle'
                 }
             ];
             $scope.currentShape = $scope.shapes[0];
@@ -40,11 +40,17 @@ angular.module('griddropApp')
             $scope.resetGame();
 
             $scope.updateCells = function() {
-                console.log('here');
-                angular.forEach($scope.contents, function(content) {
-                    content.displayClass = $scope.currentShape.displayClass;
-                })
+                angular.forEach($scope.contents, function(row) {
+                    angular.forEach(row, function(content) {
+                        content.displayClass = $scope.currentShape.displayClass;
+                    })
+                });
+                $scope.initial.displayClass = $scope.currentShape.displayClass;
             };
+
+            $scope.$watch('initial', function(drag) {
+                drag.displayClass = $scope.currentShape.displayClass;
+            });
 
 
             $scope.$on('grid-drop-change', function(event, position) {
